@@ -1,0 +1,66 @@
+{
+    "developer_type": {
+        "header": "Tipo de desarrollador",
+        "results": {
+            "f": "frontend",
+            "b": "backend",
+            "pm": "project manager"
+        },
+        "questions": [
+            {
+                "question": "¿Qué programa te gusta usar",
+                "options": [
+                    {
+                        "option": "Photoshop, Ilustrator, Canva, Power Point",
+                        "to": "frontend",
+                        "value": 5
+                    },
+                    {
+                        "option": "Excel, ",
+                        "to": "backend",
+                        "value": 4
+                    },
+                    {
+                        "option": "Word, Trello, Meet",
+                        "to": "project manager",
+                        "value": 3
+                    }
+                ]
+            }
+        ]
+    },
+    "university_career": {
+        "header": "¿Qué carrera de EICA te sugerimos?",
+        "results": {
+            "bio": "Bioingeniería",
+            "sis": "Ingeniería en Sistemas de Información",
+            "pro": "Programador Universitario en Sistemas",
+            "tag": "Tecnicatura en Agroalimentos",
+            "amb": "Tecnicatura en Gestión Ambiental",
+            "iag": "Ingeniería en Agroindustria"
+        },
+        "questions": [
+            {
+                "question": "¿Qué lugares te gustan?",
+                "options": [
+                    {
+                        "option": "Campo",
+                        "to": "",
+                        "value": 0
+                    },
+                    {
+                        "option": "",
+                        "to": "",
+                        "value": 0
+                    },
+                    {
+                        "option": "",
+                        "to": "",
+                        "value": 0
+                    }
+                ]
+            }
+        ]
+    }
+}
+
