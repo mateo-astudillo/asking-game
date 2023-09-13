@@ -1,66 +1,130 @@
 {
-    "developer_type": {
-        "header": "Tipo de desarrollador",
-        "results": {
-            "f": "frontend",
-            "b": "backend",
-            "pm": "project manager"
-        },
-        "questions": [
-            {
-                "question": "¿Qué programa te gusta usar",
-                "options": [
-                    {
-                        "option": "Photoshop, Ilustrator, Canva, Power Point",
-                        "to": "frontend",
-                        "value": 5
-                    },
-                    {
-                        "option": "Excel, ",
-                        "to": "backend",
-                        "value": 4
-                    },
-                    {
-                        "option": "Word, Trello, Meet",
-                        "to": "project manager",
-                        "value": 3
-                    }
-                ]
-            }
-        ]
+  "DeveloperType": {
+    "header": "¿Qué tipo de desarrollador serías?",
+    "results": {
+      "f": "frontend",
+      "b": "backend",
+      "pm": "project manager"
     },
-    "university_career": {
-        "header": "¿Qué carrera de EICA te sugerimos?",
-        "results": {
-            "bio": "Bioingeniería",
-            "sis": "Ingeniería en Sistemas de Información",
-            "pro": "Programador Universitario en Sistemas",
-            "tag": "Tecnicatura en Agroalimentos",
-            "amb": "Tecnicatura en Gestión Ambiental",
-            "iag": "Ingeniería en Agroindustria"
-        },
-        "questions": [
-            {
-                "question": "¿Qué lugares te gustan?",
-                "options": [
-                    {
-                        "option": "Campo",
-                        "to": "",
-                        "value": 0
-                    },
-                    {
-                        "option": "",
-                        "to": "",
-                        "value": 0
-                    },
-                    {
-                        "option": "",
-                        "to": "",
-                        "value": 0
-                    }
-                ]
-            }
+    "questions": [
+      {
+        "question": "¿Qué programa te gusta más?",
+        "options": [
+          {
+            "value": "Photoshop, Ilustrator, Canva, Power Point",
+            "to": "f",
+            "weight": 5
+          },
+          {
+            "value": "Excel, ",
+            "to": "b",
+            "weight": 4
+          },
+          {
+            "value": "Word, Trello, Meet",
+            "to": "pm",
+            "weight": 3
+          }
         ]
-    }
+      },
+      {
+        "question": "¿Qué actividades sueles realizar?",
+        "options": [
+          {
+            "value": "Dibujar",
+            "to": "f",
+            "weight": 5
+          },
+          {
+            "value": "Ordenar",
+            "to": "b",
+            "weight": 2
+          },
+          {
+            "value": "Organizar",
+            "to": "pm",
+            "weight": 3
+          }
+        ]
+      },
+      {
+        "question": "¿Qué materia te gusta más?",
+        "options": [
+          {
+            "value": "Matemática",
+            "to": "b",
+            "weight": 3
+          },
+          {
+            "value": "Historia",
+            "to": "pm",
+            "weight": 1
+          },
+          {
+            "value": "Arte",
+            "to": "f",
+            "weight": 5
+          }
+        ]
+      },
+      {
+        "question": "¿Con qué te identificás?",
+        "options": [
+          {
+            "value": "Aire",
+            "to": "b",
+            "weight": 1
+          },
+          {
+            "value": "Fuego",
+            "to": "f",
+            "weight": 1
+          },
+          {
+            "value": "Agua",
+            "to": "pm",
+            "weight": 2
+          },
+          {
+            "value": "Tierra",
+            "to": "b",
+            "weight": 1
+          }
+        ]
+      }
+    ]
+  },
+  "Career": {
+    "header": "¿Qué carrera de EICA te sugerimos?",
+    "results": {
+      "bio": "Bioingeniería",
+      "sis": "Ingeniería en Sistemas de Información",
+      "pro": "Programador Universitario en Sistemas",
+      "tag": "Tecnicatura en Agroalimentos",
+      "amb": "Tecnicatura en Gestión Ambiental",
+      "iag": "Ingeniería en Agroindustria"
+    },
+    "questions": [
+      {
+        "question": "¿Qué lugares te gustan?",
+        "options": [
+          {
+            "value": "Campo",
+            "to": "",
+            "weight": 0
+          },
+          {
+            "value": "",
+            "to": "",
+            "weight": 0
+          },
+          {
+            "value": "",
+            "to": "",
+            "weight": 0
+          }
+        ]
+      }
+    ]
+  }
 }
-
