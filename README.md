@@ -3,6 +3,10 @@
 It is a simple game of questions where each one is associated with a final result according to a theme.
 It is designed for the "Expo al Futuro 2023" in Villa Mercedes, San Luis, Argentina
 
+## Requeriments
+
+You must have python installed, see https://www.python.org/downloads/
+
 ## Run Locally
 
 Clone the project
@@ -23,7 +27,7 @@ Install dependencies
   pip3 install -r requeriments.txt
 ```
 
-Start the server
+Start the application
 
 ```bash
   python3 app.py
@@ -33,4 +37,3 @@ Start the server
 ## Authors
 
 - [@Mateo Astudillo](https://www.github.com/mateo-astudillo)
-
