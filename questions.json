@@ -16,7 +16,7 @@
             "weight": 5
           },
           {
-            "value": "Excel, ",
+            "value": "Excel",
             "to": "b",
             "weight": 4
           },
@@ -95,33 +95,86 @@
     ]
   },
   "Career": {
-    "header": "¿Qué carrera de EICA te sugerimos?",
+    "header": "¿Qué escuela de la Uvime te sugerimos?",
     "results": {
-      "bio": "Bioingeniería",
-      "sis": "Ingeniería en Sistemas de Información",
-      "pro": "Programador Universitario en Sistemas",
-      "tag": "Tecnicatura en Agroalimentos",
-      "amb": "Tecnicatura en Gestión Ambiental",
-      "iag": "Ingeniería en Agroindustria"
+      "ecs": "Escuela de Ciencias de la Salud",
+      "eica": "Escuela de Ingeniería y Ciencias Ambientales",
+      "egee": "Escuela de Gestión de Empresas y Economía",
+      "ecse": "Escuela de Ciencias Sociales y Educación"
     },
     "questions": [
       {
-        "question": "¿Qué lugares te gustan?",
+        "question": "¿?",
         "options": [
           {
-            "value": "Campo",
-            "to": "",
-            "weight": 0
+            "value": "a",
+            "to": "ecs",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "eica",
+            "weight": 1
           },
           {
             "value": "",
-            "to": "",
-            "weight": 0
+            "to": "egee",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "ecse",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "question": "¿?",
+        "options": [
+          {
+            "value": "",
+            "to": "ecs",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "eica",
+            "weight": 1
           },
           {
             "value": "",
-            "to": "",
-            "weight": 0
+            "to": "egee",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "ecse",
+            "weight": 1
+          }
+        ]
+      },
+      {
+        "question": "¿?",
+        "options": [
+          {
+            "value": "",
+            "to": "ecs",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "eica",
+            "weight": 1
+          },
+          {
+            "value": "",
+            "to": "egee",
+            "weight": 1
+          },
+          {
+            "value": "Mar",
+            "to": "ecse",
+            "weight": 1
           }
         ]
       }
