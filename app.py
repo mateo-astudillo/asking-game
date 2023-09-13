@@ -1,6 +1,8 @@
 import json
 import customtkinter
-from customtkinter import CTk, CTkEntry, CTkButton, CTkLabel, CTkFrame
+from customtkinter import (
+    CTk, CTkEntry, CTkButton, CTkLabel, CTkFrame
+)
 
 customtkinter.set_default_color_theme("green")
 customtkinter.set_widget_scaling(2)
@@ -10,8 +12,10 @@ with open("questions.json", "r") as questions:
 
 
 class InsertUsername(CTkFrame):
-    def __init__(self, master: CTk, callback):
+    def __init__(self, master: CTk):
         super().__init__(master)
+
+        self.master = master
 
         self.username_label = CTkLabel(
             master=self,
@@ -26,7 +30,7 @@ class InsertUsername(CTkFrame):
         self.username_btn = CTkButton(
             master=self,
             text="Ok",
-            command=callback
+            # command=callback
         )
 
         self.username_label.grid(row=0, column=0, padx=20, pady=10)
@@ -34,80 +38,134 @@ class InsertUsername(CTkFrame):
         self.username_btn.grid(row=2, column=0, padx=20, pady=10)
 
         self.username_entry.focus()
-        self.username_entry.bind(sequence="<Return>", command=callback)
+        self.username_entry.bind(sequence="<Return>", command=self.close)
+
+    def close(self, event=None):
+        self.master.st_frm.pack()
+        self.pack_forget()
+        self.destroy()
 
 
 class SelectThematic(CTkFrame):
-    def __init__(self, master: CTk, callback):
+    def __init__(self, master: CTk):
         super().__init__(master)
-
-        self.callback = callback
-        self.thematic = customtkinter.StringVar()
+        self.master = master
 
         self.select_lbl = CTkLabel(
             master=self,
             text="Selecciona la temática",
-            text_color="black",
-            fg_color="white",
-            corner_radius=5
-
         )
 
         self.thematics = []
-        for thematic in data:
+        for key in data.keys():
             thematic_lbl = CTkButton(
                 master=self,
-                text=thematic.get("header"),
-                command=lambda: self.set_thematic(thematic.get("header"))
+                text=data.get(key).get("header"),
+                command=lambda k=key: self.set_thematic(k)
             )
+            thematic_lbl.pack(padx=20, pady=10)
             self.thematics.append(thematic_lbl)
 
-        self.select_lbl.grid(row=0, column=0, padx=10, pady=10)
-        for i in range(len(self.thematics)):
-            self.thematics[i].grid(row=i + 1, column=0, padx=20, pady=10)
+    def set_thematic(self, key: str):
+        self.pack_forget()
+        self.master.set_thematic_key(key)
+        self.master.init_questions()
+        self.destroy()
 
-    def set_thematic(self, thematic: str):
-        self.thematic.set(value=thematic)
-        self.callback()
+
+class Question(CTkFrame):
+    def __init__(self, master, question: str, options: list, next):
+        super().__init__(master)
+
+        self.next = next
+
+        self.question = CTkLabel(
+            master=self,
+            text=question
+        )
+
+        self.question.pack()
+        for option in options:
+            to = option.get("to")
+            weight = option.get("weight")
+            value_lbl = CTkButton(
+                master=self,
+                text=option.get("value"),
+                command=lambda t=to, w=weight: self.next(t, w)
+            )
+            value_lbl.pack(padx=20, pady=10, fill="x")
 
 
 class Questions(CTkFrame):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, master: CTk, thematic_key: str):
+        super().__init__(master)
+
+        self.nq = 0
+
+        self.thematic_lbl = CTkLabel(
+            master=self,
+            text=data.get(thematic_key).get("header")
+        )
+
+        self.thematic_lbl.pack(padx=10, pady=10)
+
+        self.questions = []
+        questions = data.get(thematic_key).get("questions")
+        for question in questions:
+            q = Question(
+                master=self,
+                question=question.get("question"),
+                options=question.get("options"),
+                next=self.next
+            )
+            self.questions.append(q)
+
+        self.questions[self.nq].pack(padx=20, pady=10, fill="x")
+
+    def next(self, to: str, weight: int):
+        self.questions[self.nq].pack_forget()
+        self.questions[self.nq].destroy()
+        self.nq += 1
+        if self.nq == len(self.questions):
+            self.pack_forget()
+            self.destroy()
+            return
+        self.questions[self.nq].pack(padx=20, pady=10, fill="x")
 
 
 class App(CTk):
     def __init__(self):
         super().__init__()
         self.title("Juego de preguntas")
+        self.minsize(width=800, height=800)
 
-        self.username = customtkinter.StringVar(value="username")
-        self.thematic = customtkinter.Variable()
+        self.username = ""
+        self.thematic_key = ""
+        self.results = {}
 
-        self.iu_frm = InsertUsername(
-            master=self,
-            callback=self.on_close_insert_usename
-        )
+        self.iu_frm = InsertUsername(master=self)
+        self.st_frm = SelectThematic(master=self)
 
-        self.st_frm = SelectThematic(
-            master=self,
-            callback=self.on_close_select_thematic
-        )
+        self.iu_frm.pack(padx=20, pady=20)
 
-        self.grid_columnconfigure((0, 1), weight=1)
-        self.iu_frm.grid(row=0, column=0, padx=20, ipady=20)
+    def set_username(self, username: str):
+        self.username = username
 
-    def on_close_insert_usename(self, event=None):
-        self.username.set(self.iu_frm.username_entry.get())
-        self.iu_frm.grid_remove()
-        self.iu_frm.destroy()
+    def set_thematic_key(self, thematic_key: str):
+        self.thematic_key = thematic_key
 
-        self.st_frm.grid(row=0, column=0, padx=20, ipady=20)
+    def init_questions(self):
+        results = data.get(self.thematic_key).get("results")
+        for r in results.keys():
+            self.results[r] = {
+                "name": results.get(r),
+                "score": 0
+            }
 
-    def on_close_select_thematic(self):
-        self.thematic.set(self.st_frm.thematic.get())
-        self.st_frm.grid_remove()
-        self.st_frm.destroy()
+        print(self.results)
+
+        self.qq_frm = Questions(master=self, thematic_key=self.thematic_key)
+        self.qq_frm.pack()
 
 
 if __name__ == "__main__":
