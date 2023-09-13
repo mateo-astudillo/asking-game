@@ -1,7 +1,7 @@
 import json
 import customtkinter
 from customtkinter import (
-    CTk, CTkEntry, CTkButton, CTkLabel, CTkFrame
+    CTk, CTkEntry, CTkButton, CTkLabel, CTkFrame, CTkFont
 )
 
 customtkinter.set_default_color_theme("green")
@@ -24,13 +24,12 @@ class InsertUsername(CTkFrame):
 
         self.username_entry = CTkEntry(
             master=self,
-            # textvariable=self.username
         )
 
         self.username_btn = CTkButton(
             master=self,
             text="Ok",
-            # command=callback
+            command=self.close
         )
 
         self.username_label.grid(row=0, column=0, padx=20, pady=10)
@@ -41,6 +40,7 @@ class InsertUsername(CTkFrame):
         self.username_entry.bind(sequence="<Return>", command=self.close)
 
     def close(self, event=None):
+        self.master.username = self.username_entry.get().replace(" ", "")
         self.master.st_frm.pack()
         self.pack_forget()
         self.destroy()
@@ -77,8 +77,6 @@ class Question(CTkFrame):
     def __init__(self, master, question: str, options: list, next):
         super().__init__(master)
 
-        self.next = next
-
         self.question = CTkLabel(
             master=self,
             text=question
@@ -91,7 +89,7 @@ class Question(CTkFrame):
             value_lbl = CTkButton(
                 master=self,
                 text=option.get("value"),
-                command=lambda t=to, w=weight: self.next(t, w)
+                command=lambda t=to, w=weight: next(t, w)
             )
             value_lbl.pack(padx=20, pady=10, fill="x")
 
@@ -99,6 +97,7 @@ class Question(CTkFrame):
 class Questions(CTkFrame):
     def __init__(self, master: CTk, thematic_key: str):
         super().__init__(master)
+        self.master = master
 
         self.nq = 0
 
@@ -123,14 +122,39 @@ class Questions(CTkFrame):
         self.questions[self.nq].pack(padx=20, pady=10, fill="x")
 
     def next(self, to: str, weight: int):
+        self.master.add_to_the_result(to, weight)
         self.questions[self.nq].pack_forget()
         self.questions[self.nq].destroy()
         self.nq += 1
         if self.nq == len(self.questions):
+            self.master.show_results()
             self.pack_forget()
             self.destroy()
             return
         self.questions[self.nq].pack(padx=20, pady=10, fill="x")
+
+
+class Result(CTkFrame):
+    def __init__(self, master: CTk, results: dict, user: str):
+        super().__init__(master)
+
+        result = ""
+        max_score = 0
+        print(results)
+        for key in results.keys():
+            s = results.get(key).get("score")
+            if int(s) >= max_score:
+                max_score = int(s)
+                result = results.get(key).get("name")
+
+        self.result_lbl = CTkLabel(
+            master=self,
+            text=f"{user}: {result.capitalize()}",
+            # font=CTkFont(family="Courier", size=32, weight="bold")
+        )
+
+        self.pack()
+        self.result_lbl.pack(fill="both", padx=20, pady=20)
 
 
 class App(CTk):
@@ -162,10 +186,21 @@ class App(CTk):
                 "score": 0
             }
 
-        print(self.results)
-
-        self.qq_frm = Questions(master=self, thematic_key=self.thematic_key)
+        self.qq_frm = Questions(
+            master=self,
+            thematic_key=self.thematic_key
+        )
         self.qq_frm.pack()
+
+    def add_to_the_result(self, to: str, weight: int):
+        self.results.get(to)["score"] += weight
+
+    def show_results(self):
+        self.result = Result(
+            master=self,
+            results=self.results,
+            user=self.username
+        )
 
 
 if __name__ == "__main__":
