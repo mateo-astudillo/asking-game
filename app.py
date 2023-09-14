@@ -1,4 +1,5 @@
 import json
+import time
 import customtkinter
 from customtkinter import (
     CTk, CTkEntry, CTkButton, CTkLabel, CTkFrame, CTkFont
@@ -160,6 +161,15 @@ class Result(CTkFrame):
 class App(CTk):
     def __init__(self):
         super().__init__()
+        self.result = None
+        self.back_btn= None
+        self.start()
+
+    def start(self):
+        if self.result is not None:
+            self.result.pack_forget()
+        if self.back_btn is not None:
+            self.back_btn.pack_forget()
         self.title("Juego de preguntas")
         self.minsize(width=800, height=800)
 
@@ -201,6 +211,12 @@ class App(CTk):
             results=self.results,
             user=self.username
         )
+        self.back_btn = CTkButton(
+            master=self,
+            text="Volver a empezar",
+            command=self.start
+        )
+        self.back_btn.pack(padx=20, pady=20)
 
 
 if __name__ == "__main__":
