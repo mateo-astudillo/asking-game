@@ -95,7 +95,7 @@
     ]
   },
   "Career": {
-    "header": "¿Qué escuela de la Unvime te sugerimos?",
+    "header": "¿Qué escuela de la Uvime te sugerimos?",
     "results": {
       "ecs": "Escuela de Ciencias de la Salud",
       "eica": "Escuela de Ingeniería y Ciencias Ambientales",
@@ -104,75 +104,75 @@
     },
     "questions": [
       {
-        "question": "Que tipo de ciencia o materia te gusta mas?",
-        "options": [ 
+        "question": "¿?",
+        "options": [
           {
-            "value": "Matematicas ",
-            "to": "eica",
-            "weight": 1
-          },
-          {
-            "value": "Quimica",
+            "value": "a",
             "to": "ecs",
             "weight": 1
           },
           {
-            "value": "Estadisticas",
+            "value": "Mar",
+            "to": "eica",
+            "weight": 1
+          },
+          {
+            "value": "",
             "to": "egee",
             "weight": 1
           },
           {
-            "value": "Historia",
+            "value": "Mar",
             "to": "ecse",
             "weight": 1
           }
         ]
       },
       {
-        "question": "¿Como te identificas?",
+        "question": "¿?",
         "options": [
           {
-            "value": "Extrovertido, pulcro",
+            "value": "",
             "to": "ecs",
             "weight": 1
           },
           {
-            "value": "Lógico, dinámico",
+            "value": "Mar",
             "to": "eica",
             "weight": 1
           },
           {
-            "value": "Organizado, Eficiente",
+            "value": "",
             "to": "egee",
             "weight": 1
           },
           {
-            "value": "Lúcido",
+            "value": "Mar",
             "to": "ecse",
             "weight": 1
           }
         ]
       },
       {
-        "question": "¿Qué estación del año te gusta más?",
+        "question": "¿?",
         "options": [
           {
-            "value": "Verano",
+            "value": "",
             "to": "ecs",
             "weight": 1
           },
           {
-            "value": "Invierno",
+            "value": "Mar",
             "to": "eica",
             "weight": 1
           },
           {
-            "value": "Otoño",
+            "value": "",
             "to": "egee",
             "weight": 1
           },
           {
-            "value": "Primavera",
+            "value": "Mar",
             "to": "ecse",
             "weight": 1
           }
